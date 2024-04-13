@@ -130,10 +130,6 @@ def update_love_count():
         return jsonify({'success': True})
     return jsonify({'success': False})
 
-if __name__ == '__main__':
-    #app.run(debug=True)
-    app.run(host='192.168.1.14', port=5000, debug=True, threaded=True)
-
 
 
     
