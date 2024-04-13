@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subjectify</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
+  <link rel="icon" type="image/png" href="static\images\Subjectify logo.png">
+</head>
+<body>
+  <header id="navbar">
+    <nav class="navbar-container container">
+      <a href="/" class="home-link">
+        <img src="static\images\Subjectify logo.png" alt="Subjectify Logo" class="navbar-logo">
+        Subjectify
+      </a>
+    
+      <button type="button" id="navbar-toggle" aria-controls="navbar-menu" aria-label="Toggle menu" aria-expanded="false">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <div id="navbar-menu" aria-labelledby="navbar-toggle">
+        <ul class="navbar-links">
+          <li class="navbar-item"><a class="navbar-link" href="/pdfs">PDFs</a></li>
+          <li class="navbar-item"><a class="navbar-link" href="/contribute">Contribute</a></li>
+          <li class="navbar-item"><a class="navbar-link" href="/about">About</a></li>
+        </ul>
+      </div>
+    </nav>    
+    
+
+    <div class="about-container">
+        <div class="about-left">
+          <!-- Left side image -->
+          <img src="static\images\Subjectify logo.png" alt="Left Side Image" class="abimg">
+        </div>
+        <div class="about-right">
+          <!-- Right side content about the website -->
+          <h2>About Subjectify</h2>
+          <p class="abp">Subjectify is an open-source platform where users can access and contribute to a diverse collection of educational materials. Whether you're seeking study notes or eager to share your own insights, Subjectify offers a collaborative space for learners to engage and enhance the learning experience.          </p>
+          <!-- GitHub link button -->
+          <a href="https://github.com/your_username/your_repository" target="_blank" class="btn btn-primary">GitHub</a>
+        </div>
+    </div>
+
+    
+
+      
+  </header>
+
+
+  
+
+
+  <script src="static\js\script.js"></script>
+</body>
+</html>

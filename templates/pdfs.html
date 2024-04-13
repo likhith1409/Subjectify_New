@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subjectify</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
+  <link rel="icon" type="image/png" href="static\images\Subjectify logo.png">
+  <style>
+    body {
+      overflow-y: auto; /* or overflow-y: scroll; */
+      max-height: calc(100vh - 100px);
+    }
+  </style>
+</head>
+<body>
+  <header id="navbar">
+    <nav class="navbar-container container">
+      <a href="/" class="home-link">
+        <img src="static\images\Subjectify logo.png" alt="Subjectify Logo" class="navbar-logo">
+        Subjectify
+      </a>
+    
+      <button type="button" id="navbar-toggle" aria-controls="navbar-menu" aria-label="Toggle menu" aria-expanded="false">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <div id="navbar-menu" aria-labelledby="navbar-toggle">
+        <ul class="navbar-links">
+          <li class="navbar-item"><a class="navbar-link" href="/pdfs">PDFs</a></li>
+          <li class="navbar-item"><a class="navbar-link" href="/contribute">Contribute</a></li>
+          <li class="navbar-item"><a class="navbar-link" href="/about">About</a></li>
+        </ul>
+      </div>
+    </nav>  
+  </header>
+  
+  <div class="content">
+    <div class="scrollable-notes-container">
+      <section class="notes-section container">
+        {% for note in notes %}
+        <div class="note-container">
+            <h2 class="note-title">{{ note.note_title }}</h2>
+            <img src="{{ url_for('uploaded_image', filename=note.thumbnail_filename) }}" alt="Thumbnail" class="note-image">
+            <a href="{{ url_for('download_pdf', filename=note.pdf_filename) }}" class="download-link">Download Notes</a>
+            <p class="uploaded-by">Uploaded by: {{ note.contributor_name }}</p>
+            <div class="love-container">
+                <div class="love-icon" onclick="toggleLove('{{ note.id }}')">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart">
+                      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l8.78-8.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                  </svg>
+                </div>
+                <span class="love-count" id="love-count-{{ note.id }}">{{ love_counts.get(note.id, 0) }}</span>
+            </div>
+        </div>
+        {% endfor %}
+      </section>
+        <script>
+          function searchNotes() {
+              var input, filter, notes, noteContainer, noteTitle, i, txtValue;
+              input = document.getElementById("search-input");
+              filter = input.value.toUpperCase();
+              notes = document.getElementsByClassName("note-container");
+              for (i = 0; i < notes.length; i++) {
+                  noteTitle = notes[i].getElementsByClassName("note-title")[0];
+                  txtValue = noteTitle.textContent || noteTitle.innerText;
+                  if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                      notes[i].style.display = "";
+                  } else {
+                      notes[i].style.display = "none";
+                  }
+              }
+          }
+        </script>
+        <script>
+          function toggleLove(noteId) {
+              // Send an AJAX request to update the love count
+              fetch('/update_love_count', {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({ note_id: noteId }),
+              })
+              .then(response => response.json())
+              .then(data => {
+                  if (data.success) {
+                      // Update love count displayed on the page
+                      const loveCountSpan = document.getElementById(`love-count-${noteId}`);
+                      const currentCount = parseInt(loveCountSpan.textContent);
+                      loveCountSpan.textContent = currentCount + 1;
+                  }
+              })
+              .catch(error => console.error('Error:', error));
+          }
+        </script>
+    </div>
+  </div>
+
+
+
+  
+
+  <footer>
+    <p>Copyright &copy; 2024 Subjectify. All rights reserved. Maintained by N Likhith Reddy.</p>
+  </footer>
+  <script src="static\js\script.js"></script>
+</body>
+</html>

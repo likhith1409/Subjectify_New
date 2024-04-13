@@ -1,0 +1,885 @@
+:root {
+    --navbar-bg-color: #3a3c51;
+    --navbar-text-color: hsl(0, 0%, 85%);
+    --navbar-text-color-focus: #3a3c51;
+    --navbar-bg-contrast: #fce6d1;
+}
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6;
+    background-color: #fce6d1;
+}
+
+
+.container {
+    max-width: 1000px;
+    padding-left: 1.4rem;
+    padding-right: 1.4rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+#navbar {
+    --navbar-height: 64px;
+    position: fixed;
+    height: var(--navbar-height);
+    background-color: var(--navbar-bg-color);
+    left: 0;
+    right: 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+    align-items: center;
+}
+.navbar-item {
+    margin: 0.4em;
+    width: 100%;
+}
+  
+.home-link,
+.navbar-link {
+    color: var(--navbar-text-color);
+    text-decoration: none;
+    display: flex;
+    font-weight: 300;
+    font-size: large;
+    font-family: Georgia, serif;
+    align-items: center;
+}
+  
+.home-link:is(:focus, :hover) {
+    color: #fce6d1;
+}
+  
+.navbar-link {
+    justify-content: center;
+    width: 100%;
+    padding: 0.4em 0.8em;
+    border-radius: 5px;
+}
+  
+.navbar-link:is(:focus, :hover) {
+    color: var(--navbar-text-color-focus);
+    background-color: var(--navbar-bg-contrast);
+}
+.navbar-logo {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    margin-right: 0.5em;
+}
+#navbar-toggle {
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.icon-bar {
+    display: block;
+    width: 25px;
+    height: 4px;
+    margin: 2px;
+    background-color: var(--navbar-text-color);
+}
+#navbar-toggle:is(:focus, :hover) .icon-bar {
+    background-color: var(--navbar-text-color-focus);
+}
+#navbar-toggle[aria-expanded="true"] .icon-bar:is(:first-child, :last-child) {
+    position: absolute;
+    margin: 0;
+    width: 30px;
+}
+#navbar-toggle[aria-expanded="true"] .icon-bar:first-child {
+    transform: rotate(45deg);
+}
+#navbar-toggle[aria-expanded="true"] .icon-bar:nth-child(2) {
+    opacity: 0;
+}
+#navbar-toggle[aria-expanded="true"] .icon-bar:last-child {
+    transform: rotate(-45deg);
+}
+#navbar-menu {
+    position: fixed;
+    top: var(--navbar-height);
+    bottom: 0;
+    opacity: 0;
+    visibility: hidden;
+    left: 0;
+    right: 0;
+}
+#navbar-toggle[aria-expanded="true"] + #navbar-menu {
+    background-color: rgba(0, 0, 0, 0.4);
+    opacity: 1;
+    visibility: visible;
+}
+.navbar-links {
+    list-style: none;
+    position: absolute;
+    background-color: var(--navbar-bg-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    left: 0;
+    right: 0;
+    margin: 1.4rem;
+    border-radius: 5px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+  
+#navbar-toggle[aria-expanded="true"] + #navbar-menu .navbar-links {
+    padding: 1em;
+}
+
+@media screen and (min-width: 700px) {
+    /* Hide navbar toggle button when screen size is larger */
+    #navbar-toggle,
+    #navbar-toggle[aria-expanded="true"] {
+        display: none;
+    }
+
+    /* Show navbar menu when toggle button is clicked */
+    #navbar-menu,
+    #navbar-toggle[aria-expanded="true"] #navbar-menu {
+        visibility: visible;
+        opacity: 1;
+        position: static;
+        display: block;
+        height: 100%;
+    }
+
+    /* Adjust navbar links */
+    .navbar-links,
+    #navbar-toggle[aria-expanded="true"] #navbar-menu .navbar-links {
+        margin: 0;
+        padding: 0;
+        box-shadow: none;
+        position: static;
+        flex-direction: row;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+
+
+  
+#image-section {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px; /* Adjust as needed */
+    
+}
+  
+.image-container {
+    width: 45%; /* Adjust as needed */
+
+}
+  
+
+  
+.image-container .rigimg {
+    width: 100%;
+    height: 700px;
+    margin-left: 100px;
+    margin-top: -30px;
+    position: relative;
+    animation: branchMove 5s infinite alternate; /* Adjust timing as needed */
+    transform-origin: left top;
+}
+
+@keyframes branchMove {
+    0% {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(5deg); /* Adjust the angle of movement */
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+  
+@keyframes moveRound {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+}
+  
+.image-container .midimg {
+    width: 200px;
+    height: 200px;
+    margin-left: 150px;
+    margin-top: 10px;
+    animation: moveRound 9s linear infinite; /* Adjust the animation duration and timing function as needed */
+}
+  
+.image-container .head1 {
+    font-family: Georgia, serif; /* Specify Georgia font family */
+    font-weight: bold; /* Set font weight to bold */
+    margin-top: 5px;
+    font-size: 40px;
+    color: #19284a; /* Set text color to #19284a */
+    margin-left: 150px;
+}
+
+.image-container .par1 {
+    font-size: 15px; /* Adjust the font size */
+    color: #19284a; /* Set the color */
+    font-family: Georgia, serif; /* Choose font family */
+    margin-left: 5px; /* Increase left margin */
+    margin-right: 5px; /* Increase right margin */
+    text-align: justify; /* Justify text for a cleaner look */
+    line-height: 1.5; /* Set line height for better readability */
+}
+  
+
+.image-container .lefimg {
+    width: 100%;
+    height: 700px;
+    margin-left: -600px; /* Initial position */
+    margin-top: -30px;
+    position: relative;
+    transform: scaleX(-1);
+    animation: branchMove1 5s infinite alternate; /* Adjust timing as needed */
+    transform-origin: right top;
+}
+
+@keyframes branchMove1 {
+    0% {
+        transform: scaleX(-1) rotate(0deg);
+    }
+    50% {
+        transform: scaleX(-1) rotate(5deg); /* Adjust the angle of movement */
+    }
+    100% {
+        transform: scaleX(-1) rotate(0deg);
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    #image-section {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .image-container {
+        width: 100%;
+        margin-bottom: 20px;
+        padding: 0 10px;
+    }
+
+    .image-container .rigimg,
+    .image-container .lefimg {
+        display: none; /* Hide left and right images on mobile */
+    }
+
+    .image-container .midimg {
+        margin-left: auto; /* Center the midimg horizontally */
+        margin-right: auto;
+        display: block; /* Ensure midimg is displayed */
+        animation: none; /* Remove animation for mobile screens */
+    }
+
+    .image-container .head1 {
+        margin-left: 0;
+        text-align: center;
+        display: block; /* Make headings visible on mobile */
+    }
+    .image-container .par1 {
+        margin-left: 15px; /* Adjust left margin for paragraphs on mobile */
+        margin-right: 15px; /* Adjust right margin for paragraphs on mobile */
+    }
+}
+
+
+.custom-form {
+    --input-text-color: #fff;
+    --input-bg-color: #283542;
+    --focus-input-bg-color: #283542;
+    --text-color: white;
+    --active-color: white;
+    --width-of-input: 200px;
+    --inline-padding-of-input: 1.2em;
+    --gap: 0.9rem;
+    font-size: 0.9rem;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    width: var(--width-of-input);
+    position: relative;
+    isolation: isolate;
+    margin-top: 10px;
+    margin-left: 60px;
+    width: 390px;
+}
+
+.custom-fancy-bg {
+    position: absolute;
+    width: 100%;
+    inset: 0;
+    background: var(--input-bg-color);
+    border-radius: 30px;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.custom-form label {
+    width: 100%;
+    padding: 0.8em;
+    height: 40px;
+    padding-inline: var(--inline-padding-of-input);
+    display: flex;
+    align-items: center;
+}
+
+.custom-search-icon, .custom-close-btn {
+    position: absolute;
+}
+
+.custom-search-icon {
+    fill: var(--text-color);
+    left: var(--inline-padding-of-input);
+}
+
+.custom-search-icon svg {
+    width: 17px;
+    display: block;
+}
+
+.custom-close-btn {
+    border: none;
+    right: var(--inline-padding-of-input);
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    padding: 0.1em;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--active-color);
+    opacity: 0;
+    visibility: hidden;
+}
+
+.custom-input {
+    color: var(--input-text-color);
+    width: 100%;
+    margin-inline: min(2em,calc(var(--inline-padding-of-input) + var(--gap)));
+    background: none;
+    border: none; /* Add this line to remove the border */
+}
+
+.custom-input:focus {
+    outline: none;
+}
+
+.custom-input::placeholder {
+    color: var(--text-color)
+}
+
+.custom-input:focus ~ .custom-fancy-bg {
+    border: 1px solid var(--active-color);
+    background: var(--focus-input-bg-color);
+}
+
+.custom-input:focus ~ .custom-search-icon {
+    fill:  var(--active-color);
+}
+
+.custom-input:valid ~ .custom-close-btn {
+    opacity: 1;
+    visibility: visible;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-transition: "color 9999s ease-out, background-color 9999s ease-out";
+    -webkit-transition-delay: 9999s;
+}
+
+@media only screen and (max-width: 768px) {
+    .custom-form {
+        width: 100%; /* Take up full width on mobile */
+        margin-left: 0; /* Remove left margin on mobile */
+        flex-direction: column; /* Stack elements vertically */
+        align-items: flex-start; /* Align items to the start */
+        padding: 0 20px; /* Add padding to adjust for smaller screens */
+    }
+    
+    .custom-fancy-bg {
+        background-color: #283542;
+    }
+
+    .custom-form label {
+        width: 100%;
+        padding: 0.8em;
+        height: 40px;
+        padding-inline: var(--inline-padding-of-input);
+        display: flex;
+        align-items: center;
+    }
+
+    .custom-search-icon {
+        fill: var(--text-color);
+        left: var(--inline-padding-of-input);
+    }
+
+    .custom-search-icon svg {
+        width: 17px;
+        display: block;
+    }
+
+    .custom-close-btn {
+        right: var(--inline-padding-of-input);
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: black;
+        padding: 0.1em;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: var(--active-color);
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .custom-input {
+        color: var(--input-text-color);
+        width: 100%;
+        margin-inline: min(2em, calc(var(--inline-padding-of-input) + var(--gap)));
+        background: none;
+        border: none; /* Add this line to remove the border */
+    }
+
+    .custom-input:focus {
+        outline: none;
+    }
+
+    .custom-input::placeholder {
+        color: var(--text-color)
+    }
+
+    .custom-input:focus ~ .custom-search-icon {
+        fill:  var(--active-color);
+    }
+
+    .custom-input:valid ~ .custom-close-btn {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+.row {
+    display: flex;
+    margin-top: 30px;
+    justify-content: space-between;
+    gap: 20px; /* Adjust the gap between containers */
+}
+
+.notecontainer {
+    flex: 1;
+}
+
+.round-box {
+    border-radius: 20px; /* Adjust border radius for round corners */
+    border: 2px solid #000; /* Adjust border properties */
+    padding: 20px; /* Adjust padding */
+    text-align: center;
+}
+
+
+.note-title {
+    margin-bottom: 10px; /* Adjust margin between title and button */
+}
+
+.download-btn {
+    padding: 10px 20px; /* Adjust button padding */
+    background-color: #19284a; /* Adjust button background color */
+    color: #fff; /* Adjust button text color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+
+.notes-section {
+    margin-top: 150px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* Adjust alignment of items */
+    margin-bottom: 150px;
+}
+  
+.note-container {
+    width: calc(33.33% - 20px); /* Adjust width as needed */
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #f2cc8f;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Black box shadow */
+}
+
+  
+.note-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+  
+.note-image {
+    width: 200px; /* Adjust the width as needed */
+    height: 300px; /* Adjust the height as needed */
+    display: block; /* Ensures the image is a block element */
+    margin: 0 auto; /* Centers the image horizontally */
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+
+.download-link {
+    display: block;
+    text-align: center;
+    background-color: #007bff;
+    border: 1px solid black;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+  
+.download-link:hover {
+    background-color: #0056b3;
+}
+
+
+.notes-section {
+    margin-top: 150px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* Adjust alignment of items */
+    margin-bottom: 150px;
+}
+  
+.note-container {
+    width: calc(33.33% - 20px); /* Adjust width as needed */
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+  
+.note-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: black;
+}
+  
+.note-image {
+    width: 200px; /* Adjust the width as needed */
+    height: 300px; /* Adjust the height as needed */
+    display: block; /* Ensures the image is a block element */
+    margin: 0 auto; /* Centers the image horizontally */
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+
+.download-link {
+    display: block;
+    text-align: center;
+    background-color: #fce6d1;
+    color: black;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+  
+.download-link:hover {
+    background-color: #0056b3;
+}
+
+@media screen and (max-width: 768px) {
+    .row {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .note-container {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .round-box {
+        border-radius: 10px;
+    }
+
+    .note-image {
+        width: 100%;
+        height: auto;
+    }
+
+    .download-btn, .download-link {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+}
+
+
+/* Contribution Form Styles */
+.contribute-section {
+    padding: 20px;
+}
+  
+.contribute-form {
+    max-width: 600px;
+    margin: auto;
+}
+
+  
+.form-group {
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+  
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+  
+input[type="text"],
+input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border: None;
+    border-radius: 5px;
+}
+  
+.submit-button {
+    background-color: #19284a;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 20px; /* Adjust the value to change the roundness */
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+}
+  
+  
+  
+.submit-button:hover {
+    background-color: #ccc;
+    color: black;
+}
+.container .contpara{
+    margin-top: 100px;
+}
+  
+  /* Responsive Styles */
+@media screen and (max-width: 768px) {
+    .contribute-form {
+      width: 90%;
+    }
+    .container .contpara {
+        margin-top: -0px;
+        width: calc(100% - 20px); /* Set width to 100% of the parent container minus 20px */
+        margin-right: 5%; /* Set a percentage margin for the right gap */
+        max-width: 280px;
+    }
+    
+}
+
+.uploaded-by {
+    font-weight: bold;
+    margin-top: 10px;
+    color: black;
+  }
+  
+
+.love-container {
+    display: inline-flex;
+    align-items: center;
+}
+  
+.love-icon {
+    cursor: pointer;
+}
+  
+.love-icon svg {
+    width: 24px;
+    height: 24px;
+    fill: none;
+    stroke: #ff4d4d;
+    transition: stroke 0.3s ease;
+}
+  
+.love-icon.filled svg {
+    stroke: #ff1a1a;
+}
+  
+.love-count {
+    margin-left: 5px;
+    color: black;
+}
+
+.mute-button {
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+  
+  /* Style for the speaker icon */
+.mute-button img {
+    width: 20px; /* Adjust size as needed */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.scrollable-notes-container {
+    max-height: 700px; /* Adjust this value according to your design */
+    overflow-y: auto;
+}
+
+footer {
+    background-color: #3a3c51;
+    color: white;
+    text-align: center;
+    padding: 5px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.abimg{
+    width: 500px;
+    height: 500px;
+    margin-left: 150px;
+}
+
+
+
+.about-container {
+    display: flex;
+    align-items: center; /* Vertically center the content */
+    margin-top: 60px;
+}
+
+.about-left {
+    flex: 0 0 auto; /* Set the left side to not grow or shrink */
+    margin-right: 20px; /* Adjust the spacing between the image and content */
+}
+  
+.about-right {
+    flex: 1; /* Let the right side grow to take remaining space */
+}
+.abp{
+    margin-right: 190px;
+}
+
+/* GitHub link button */
+.about-right .btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 20px; /* Adjust the value to change the roundness */
+    transition: background-color 0.3s ease;
+  }
+  
+  .about-right .btn:hover {
+    background-color: #555;
+  }
+
+  @media only screen and (max-width: 768px) {
+    .abimg {
+        width: 300px; /* Adjust image width for mobile */
+        height: 300px; /* Adjust image height for mobile */
+        display: block;
+        margin: 0 auto;
+        margin-left: 50px;
+    }
+      
+  
+    .about-container {
+      flex-direction: column; /* Stack elements vertically for mobile */
+      align-items: flex-start; /* Align items to the start for mobile */
+      margin-top: 30px; /* Reduce top margin for mobile */
+    }
+  
+    .about-left {
+      margin-right: 0; /* Remove right margin for mobile */
+      margin-bottom: 20px; /* Add bottom margin for separation in mobile */
+    }
+  
+    .about-right {
+      flex: none; /* Reset flex property for mobile */
+      width: 100%; /* Set width to 100% for mobile */
+      margin-right: 0; /* Remove right margin for mobile */
+      text-align: center;
+    }
+  
+    .abp {
+      margin-right: 0; /* Remove right margin for mobile */
+      text-align: justify;
+      padding: 1rem;
+    }
+  
+    /* GitHub link button */
+    .about-right .btn {
+      margin-top: 20px; /* Adjust top margin for mobile */
+    }
+  }
+
+#suggestions {
+    position: absolute;
+    top: calc(100% + 5px); /* Place suggestions below the input */
+    left: 0;
+    width: 100%;
+    max-height: 200px; /* Adjust as needed */
+    overflow-y: auto;
+    background-color: #3a3c51;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    color: white;
+}
+  
+.suggestion-item {
+    padding: 10px;
+    cursor: pointer;
+}
+  
+.suggestion-item:hover {
+    background-color: #c2ece4;
+    color: black;
+}
+  
+  
